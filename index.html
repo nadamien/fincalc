@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Sri Lanka Financial Calculator Suite</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏦 Financial Calculator Suite</h1>
+            <p>Take Home Salary • Loan Calculator • Expense Tracker</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('salary')">💰 Salary Calculator</button>
+            <button class="tab" onclick="showTab('personal-loan')">💳 Personal Loan</button>
+            <button class="tab" onclick="showTab('housing-loan')">🏠 Housing Loan</button>
+            <button class="tab" onclick="showTab('expense')">📊 Expense Tracker</button>
+        </div>
+
+        <!-- Salary Calculator -->
+        <div id="salary" class="tab-content active">
+            <div class="calc-section">
+                <h3>Take Home Salary Calculator</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Monthly Gross Salary (LKR)</label>
+                        <input type="number" id="grossSalary" placeholder="100,000" inputmode="numeric" pattern="[0-9]*">
+                    </div>
+                    <div class="form-group">
+                        <label>EPF Contribution (%)</label>
+                        <input type="number" id="epfRate" value="8" step="0.1" inputmode="decimal">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>ETF Contribution (%)</label>
+                        <input type="number" id="etfRate" value="3" step="0.1" inputmode="decimal">
+                    </div>
+                    <div class="form-group">
+                        <label>Income Tax Rate (%)</label>
+                        <input type="number" id="taxRate" value="6" step="0.1" inputmode="decimal">
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button onclick="calculateSalary()">Calculate Take Home Salary</button>
+                    <button onclick="resetCalculator('salary')" class="clear-btn">Clear & Start New</button>
+                </div>
+                
+                <div id="salaryResult" class="result" style="display: none;">
+                    <div class="result-value" id="takeHomeSalary">LKR 0</div>
+                    <div class="result-label">Monthly Take Home Salary</div>
+                    <div class="breakdown">
+                        <div class="breakdown-item">
+                            <strong>Gross Salary</strong>
+                            <span id="grossAmount">LKR 0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <strong>EPF Deduction</strong>
+                            <span id="epfAmount">LKR 0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <strong>ETF Deduction</strong>
+                            <span id="etfAmount">LKR 0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <strong>Income Tax</strong>
+                            <span id="taxAmount">LKR 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Housing Loan Calculator -->
+        <div id="housing-loan" class="tab-content">
+            <div class="calc-section">
+                <h3>🏠 Housing Loan Calculator</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Loan Amount (LKR)</label>
+                        <input type="number" id="housingLoanAmount" placeholder="5,000,000" inputmode="numeric" pattern="[0-9]*">
+                    </div>
+                    <div class="form-group">
+                        <label>Interest Rate (% per year)</label>
+                        <input type="number" id="housingInterestRate" value="9" step="0.1" inputmode="decimal">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Loan Term (Years)</label>
+                        <input type="number" id="housingLoanTerm" value="20" min="5" max="30" inputmode="numeric">
+                    </div>
+                    <div class="form-group">
+                        <label>Loan Term (Months)</label>
+                        <input type="number" id="housingLoanTermMonths" value="0" min="0" max="11" inputmode="numeric">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Repayment Type</label>
+                        <select id="repaymentType" onchange="showRepaymentDescription()">
+                            <option value="equated">Equated Balance (EMI)</option>
+                            <option value="reducing">Reducing Balance</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="repaymentDescription" class="repayment-description">
+                    <div class="description-content">
+                        <h4>📊 Equated Balance (EMI)</h4>
+                        <p>Equal Monthly Installments - You pay the <strong>same amount</strong> every month. Initially, more goes toward interest, then gradually more toward principal.</p>
+                        <ul>
+                            <li>✅ Predictable monthly payments</li>
+                            <li>✅ Easier budgeting</li>
+                            <li>⚠️ Higher total interest over loan term</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button onclick="calculateHousingLoan()">Calculate Monthly Payment</button>
+                    <button onclick="resetCalculator('housing-loan')" class="clear-btn">Clear & Start New</button>
+                </div>
+                
+                <div id="housingLoanResult" class="result" style="display: none;">
+                    <div class="result-value" id="housingMonthlyPayment">LKR 0</div>
+                    <div class="result-label" id="housingPaymentLabel">Monthly Payment (1st Month)</div>
+                    <div class="interest-rate-display">
+                        <span>at <span id="housingDisplayRate">0%</span> p.a.</span>
+                    </div>
+                    
+                    <div class="loan-summary">
+                        <div class="summary-row">
+                            <span>Capital payment (1st Month)</span>
+                            <span id="housingFirstMonthPrincipal">LKR 0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Interest (1st Month)</span>
+                            <span id="housingFirstMonthInterest">LKR 0</span>
+                        </div>
+                        <div class="note">*Government taxes will apply</div>
+                    </div>
+                    
+                    <div class="breakdown">
+                        <div class="breakdown-item">
+                            <strong>Principal Amount</strong>
+                            <span id="housingPrincipalAmount">LKR 0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <strong>Total Interest</strong>
+                            <span id="housingTotalInterest">LKR 0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <strong>Total Amount</strong>
+                            <span id="housingTotalAmount">LKR 0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <strong>Loan Term</strong>
+                            <span id="housingDisplayTerm">0 years</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="housingLoanBreakdown" class="loan-breakdown" style="display: none;">
+                    <h3>📈 Housing Loan Payment Schedule</h3>
+                    <div class="breakdown-controls">
+                        <button onclick="toggleHousingBreakdown()" class="toggle-btn" id="housingBreakdownToggle">
+                            📊 Show Payment Schedule
+                        </button>
+                        <button onclick="exportHousingLoanSchedule()" class="export-btn">
+                            📄 Export Schedule
+                        </button>
+                    </div>
+                    
+                    <div id="housingPaymentSchedule" class="payment-schedule" style="display: none;">
+                        <div class="schedule-header">
+                            <span>Month</span>
+                            <span>Monthly Installment Principal</span>
+                            <span>Monthly Interest</span>
+                            <span>Monthly Installment</span>
+                            <span>Principal Amount</span>
+                        </div>
+                        <div id="housingScheduleBody" class="schedule-body">
+                            <!-- Schedule rows will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personal Loan Calculator -->
+        <div id="personal-loan" class="tab-content">
+            <div class="calc-section">
+                <h3>💳 Personal Loan Calculator</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Loan Amount (LKR)</label>
+                        <input type="number" id="personalLoanAmount" placeholder="500,000" inputmode="numeric" pattern="[0-9]*">
+                    </div>
+                    <div class="form-group">
+                        <label>Interest Rate (% per year)</label>
+                        <input type="number" id="personalInterestRate" value="15" step="0.1" inputmode="decimal">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Loan Term (Years)</label>
+                        <input type="number" id="personalLoanTerm" value="3" min="1" max="15" inputmode="numeric">
+                    </div>
+                    <div class="form-group">
+                        <label>Loan Term (Months)</label>
+                        <input type="number" id="personalLoanTermMonths" value="0" min="0" max="11" inputmode="numeric">
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button onclick="calculatePersonalLoan()">Calculate Monthly Payment</button>
+                    <button onclick="resetCalculator('personal-loan')" class="clear-btn">Clear & Start New</button>
+                </div>
+                
+                <div id="personalLoanResult" class="result" style="display: none;">
+                    <div class="result-value" id="personalMonthlyPayment">LKR 0</div>
+                    <div class="result-label">Monthly Payment</div>
+                    <div class="interest-rate-display">
+                        <span>at <span id="personalDisplayRate">0%</span> p.a.</span>
+                    </div>
+                    
+                    <div class="breakdown">
+                        <div class="breakdown-item">
+                            <strong>Principal Amount</strong>
+                            <span id="personalPrincipalAmount">LKR 0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <strong>Total Interest</strong>
+                            <span id="personalTotalInterest">LKR 0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <strong>Total Amount</strong>
+                            <span id="personalTotalAmount">LKR 0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <strong>Loan Term</strong>
+                            <span id="personalDisplayTerm">0 years</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="personalLoanBreakdown" class="loan-breakdown" style="display: none;">
+                    <h3>📈 Personal Loan Payment Schedule</h3>
+                    <div class="breakdown-controls">
+                        <button onclick="togglePersonalBreakdown()" class="toggle-btn" id="personalBreakdownToggle">
+                            📊 Show Payment Schedule
+                        </button>
+                        <button onclick="exportPersonalLoanSchedule()" class="export-btn">
+                            📄 Export Schedule
+                        </button>
+                    </div>
+                    
+                    <div id="personalPaymentSchedule" class="payment-schedule" style="display: none;">
+                        <div class="schedule-header">
+                            <span>Month</span>
+                            <span>Monthly Installment Principal</span>
+                            <span>Monthly Interest</span>
+                            <span>Monthly Installment</span>
+                            <span>Principal Amount</span>
+                        </div>
+                        <div id="personalScheduleBody" class="schedule-body">
+                            <!-- Schedule rows will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Housing Loan Calculator -->
+        <div id="housing-loan" class="tab-content">
+            <div class="calc-section">
+                <h3>🏠 Housing Loan Calculator</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Loan Amount (LKR)</label>
+                        <input type="number" id="housingLoanAmount" placeholder="5,000,000" inputmode="numeric" pattern="[0-9]*">
+                    </div>
+                    <div class="form-group">
+                        <label>Interest Rate (% per year)</label>
+                        <input type="number" id="housingInterestRate" value="9" step="0.1" inputmode="decimal">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Loan Term (Years)</label>
+                        <input type="number" id="housingLoanTerm" value="20" min="5" max="30" inputmode="numeric">
+                    </div>
+                    <div class="form-group">
+                        <label>Loan Term (Months)</label>
+                        <input type="number" id="housingLoanTermMonths" value="0" min="0" max="11" inputmode="numeric">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Repayment Type</label>
+                        <select id="repaymentType" onchange="showRepaymentDescription()">
+                            <option value="equated">Equated Balance (EMI)</option>
+                            <option value="reducing">Reducing Balance</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="repaymentDescription" class="repayment-description">
+                    <div class="description-content">
+                        <h4>📊 Equated Balance (EMI)</h4>
+                        <p>Equal Monthly Installments - You pay the <strong>same amount</strong> every month. Initially, more goes toward interest, then gradually more toward principal.</p>
+                        <ul>
+                            <li>✅ Predictable monthly payments</li>
+                            <li>✅ Easier budgeting</li>
+                            <li>⚠️ Higher total interest over loan term</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button onclick="calculateHousingLoan()">Calculate Monthly Payment</button>
+                    <button onclick="resetCalculator('housing-loan')" class="clear-btn">Clear & Start New</button>
+                </div>
+                
+                <div id="housingLoanResult" class="result" style="display: none;">
+                    <div class="result-value" id="housingMonthlyPayment">LKR 0</div>
+                    <div class="result-label" id="housingPaymentLabel">Monthly Payment (1st Month)</div>
+                    <div class="interest-rate-display">
+                        <span>at <span id="housingDisplayRate">0%</span> p.a.</span>
+                    </div>
+                    
+                    <div class="loan-summary">
+                        <div class="summary-row">
+                            <span>Capital payment (1st Month)</span>
+                            <span id="housingFirstMonthPrincipal">LKR 0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Interest (1st Month)</span>
+                            <span id="housingFirstMonthInterest">LKR 0</span>
+                        </div>
+                        <div class="note">*Government taxes will apply</div>
+                    </div>
+                    
+                    <div class="breakdown">
+                        <div class="breakdown-item">
+                            <strong>Principal Amount</strong>
+                            <span id="housingPrincipalAmount">LKR 0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <strong>Total Interest</strong>
+                            <span id="housingTotalInterest">LKR 0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <strong>Total Amount</strong>
+                            <span id="housingTotalAmount">LKR 0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <strong>Loan Term</strong>
+                            <span id="housingDisplayTerm">0 years</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="housingLoanBreakdown" class="loan-breakdown" style="display: none;">
+                    <h3>📈 Housing Loan Payment Schedule</h3>
+                    <div class="breakdown-controls">
+                        <button onclick="toggleHousingBreakdown()" class="toggle-btn" id="housingBreakdownToggle">
+                            📊 Show Payment Schedule
+                        </button>
+                        <button onclick="exportHousingLoanSchedule()" class="export-btn">
+                            📄 Export Schedule
+                        </button>
+                    </div>
+                    
+                    <div id="housingPaymentSchedule" class="payment-schedule" style="display: none;">
+                        <div class="schedule-header">
+                            <span>Month</span>
+                            <span>Monthly Installment Principal</span>
+                            <span>Monthly Interest</span>
+                            <span>Monthly Installment</span>
+                            <span>Principal Amount</span>
+                        </div>
+                        <div id="housingScheduleBody" class="schedule-body">
+                            <!-- Schedule rows will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expense Calculator -->
+        <div id="expense" class="tab-content">
+            <div class="calc-section">
+                <h3>Monthly Expense Tracker</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Expense Category</label>
+                        <select id="expenseCategory">
+                            <option value="Food & Dining">Food & Dining</option>
+                            <option value="Transportation">Transportation</option>
+                            <option value="Utilities">Utilities</option>
+                            <option value="Rent/Mortgage">Rent/Mortgage</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Education">Education</option>
+                            <option value="Insurance">Insurance</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Amount (LKR)</label>
+                        <input type="number" id="expenseAmount" placeholder="5,000" inputmode="numeric" pattern="[0-9]*">
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button onclick="addExpense()">Add Expense</button>
+                    <button onclick="resetCalculator('expense')" class="clear-btn">Clear All Expenses</button>
+                </div>
+                
+                <div id="expenseActions" class="expense-actions" style="display: none;">
+                    <div class="button-group secondary">
+                        <button onclick="exportExpenses()" class="export-btn">📄 Export to CSV</button>
+                        <button onclick="printResults('expense')" class="print-btn">🖨️ Print Summary</button>
+                    </div>
+                </div>
+                
+                <div id="expenseList" class="expense-list" style="display: none;">
+                    <h4 style="margin-bottom: 15px; color: #2a5298;">Your Monthly Expenses</h4>
+                    <div id="expenses"></div>
+                </div>
+                
+                <div id="expenseResult" class="result" style="display: none;">
+                    <div class="result-value" id="totalExpenses">LKR 0</div>
+                    <div class="result-label">Total Monthly Expenses</div>
+                    <div id="expenseBreakdown" class="breakdown"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
