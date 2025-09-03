@@ -1,450 +1,411 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="https://schema.org/WebApplication">
 <head>
+    <!-- Basic Meta Tags -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Sri Lanka Financial Calculator Suite</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>Sri Lankan Financial Calculator 2025 | Salary, EPF, ETF, APIT, Loan Calculator</title>
+    <meta name="description" content="Free Sri Lankan financial calculator for 2025. Calculate salary with EPF, ETF, APIT tax deductions, housing loans, personal loans, and monthly expense planning. Updated with latest tax rates.">
+    <meta name="keywords" content="sri lanka salary calculator, epf calculator, etf calculator, apit calculator, tax calculator sri lanka, loan calculator, housing loan sri lanka, personal loan calculator, expense planner, financial calculator sri lanka 2025">
+    <meta name="author" content="Sri Lankan Financial Calculator">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
+    
+    <!-- Geo Meta Tags -->
+    <meta name="geo.region" content="LK">
+    <meta name="geo.country" content="Sri Lanka">
+    <meta name="geo.placename" content="Sri Lanka">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Sri Lankan Financial Calculator 2025 | Free Salary & Loan Calculator">
+    <meta property="og:description" content="Calculate your Sri Lankan salary with EPF, ETF, APIT tax deductions. Housing loan, personal loan and expense planning tools. Updated for 2025 tax rates.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta property="og:image" content="https://yourdomain.com/images/calculator-preview.jpg">
+    <meta property="og:site_name" content="Sri Lankan Financial Calculator">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sri Lankan Financial Calculator 2025">
+    <meta name="twitter:description" content="Free salary calculator with EPF, ETF, APIT tax calculations for Sri Lanka. Housing and personal loan calculators included.">
+    <meta name="twitter:image" content="https://yourdomain.com/images/calculator-preview.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yourdomain.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Sri Lankan Financial Calculator",
+        "description": "Free financial calculator for Sri Lankan residents including salary calculations with EPF, ETF, APIT tax deductions, loan calculators and expense planning.",
+        "url": "https://yourdomain.com",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "Sri Lankan Salary Calculator with EPF/ETF/APIT",
+            "Housing Loan Calculator",
+            "Personal Loan Calculator", 
+            "Monthly Expense Planner",
+            "Amortization Schedule Generator"
+        ],
+        "applicationCountry": "LK",
+        "inLanguage": "en",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Sri Lankan Financial Calculator"
+        }
+    }
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXXX"
+            crossorigin="anonymous"></script>
+    
+    <!-- Chart.js for Pie Chart -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🏦 Financial Calculator Suite</h1>
-            <p>Take Home Salary • Loan Calculator • Expense Tracker</p>
-        </div>
-
-        <div class="tabs">
-            <button class="tab active" onclick="showTab('salary')">💰 Salary Calculator</button>
-            <button class="tab" onclick="showTab('personal-loan')">💳 Personal Loan</button>
-            <button class="tab" onclick="showTab('housing-loan')">🏠 Housing Loan</button>
-            <button class="tab" onclick="showTab('expense')">📊 Expense Tracker</button>
-        </div>
-
-        <!-- Salary Calculator -->
-        <div id="salary" class="tab-content active">
-            <div class="calc-section">
-                <h3>Take Home Salary Calculator</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Monthly Gross Salary (LKR)</label>
-                        <input type="number" id="grossSalary" placeholder="100,000" inputmode="numeric" pattern="[0-9]*">
-                    </div>
-                    <div class="form-group">
-                        <label>EPF Contribution (%)</label>
-                        <input type="number" id="epfRate" value="8" step="0.1" inputmode="decimal">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>ETF Contribution (%)</label>
-                        <input type="number" id="etfRate" value="3" step="0.1" inputmode="decimal">
-                    </div>
-                    <div class="form-group">
-                        <label>Income Tax Rate (%)</label>
-                        <input type="number" id="taxRate" value="6" step="0.1" inputmode="decimal">
-                    </div>
-                </div>
-                <div class="button-group">
-                    <button onclick="calculateSalary()">Calculate Take Home Salary</button>
-                    <button onclick="resetCalculator('salary')" class="clear-btn">Clear & Start New</button>
-                </div>
-                
-                <div id="salaryResult" class="result" style="display: none;">
-                    <div class="result-value" id="takeHomeSalary">LKR 0</div>
-                    <div class="result-label">Monthly Take Home Salary</div>
-                    <div class="breakdown">
-                        <div class="breakdown-item">
-                            <strong>Gross Salary</strong>
-                            <span id="grossAmount">LKR 0</span>
-                        </div>
-                        <div class="breakdown-item">
-                            <strong>EPF Deduction</strong>
-                            <span id="epfAmount">LKR 0</span>
-                        </div>
-                        <div class="breakdown-item">
-                            <strong>ETF Deduction</strong>
-                            <span id="etfAmount">LKR 0</span>
-                        </div>
-                        <div class="breakdown-item">
-                            <strong>Income Tax</strong>
-                            <span id="taxAmount">LKR 0</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Housing Loan Calculator -->
-        <div id="housing-loan" class="tab-content">
-            <div class="calc-section">
-                <h3>🏠 Housing Loan Calculator</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Loan Amount (LKR)</label>
-                        <input type="number" id="housingLoanAmount" placeholder="5,000,000" inputmode="numeric" pattern="[0-9]*">
-                    </div>
-                    <div class="form-group">
-                        <label>Interest Rate (% per year)</label>
-                        <input type="number" id="housingInterestRate" value="9" step="0.1" inputmode="decimal">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Loan Term (Years)</label>
-                        <input type="number" id="housingLoanTerm" value="20" min="5" max="30" inputmode="numeric">
-                    </div>
-                    <div class="form-group">
-                        <label>Loan Term (Months)</label>
-                        <input type="number" id="housingLoanTermMonths" value="0" min="0" max="11" inputmode="numeric">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Repayment Type</label>
-                        <select id="repaymentType" onchange="showRepaymentDescription()">
-                            <option value="equated">Equated Balance (EMI)</option>
-                            <option value="reducing">Reducing Balance</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div id="repaymentDescription" class="repayment-description">
-                    <div class="description-content">
-                        <h4>📊 Equated Balance (EMI)</h4>
-                        <p>Equal Monthly Installments - You pay the <strong>same amount</strong> every month. Initially, more goes toward interest, then gradually more toward principal.</p>
-                        <ul>
-                            <li>✅ Predictable monthly payments</li>
-                            <li>✅ Easier budgeting</li>
-                            <li>⚠️ Higher total interest over loan term</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="button-group">
-                    <button onclick="calculateHousingLoan()">Calculate Monthly Payment</button>
-                    <button onclick="resetCalculator('housing-loan')" class="clear-btn">Clear & Start New</button>
-                </div>
-                
-                <div id="housingLoanResult" class="result" style="display: none;">
-                    <div class="result-value" id="housingMonthlyPayment">LKR 0</div>
-                    <div class="result-label" id="housingPaymentLabel">Monthly Payment (1st Month)</div>
-                    <div class="interest-rate-display">
-                        <span>at <span id="housingDisplayRate">0%</span> p.a.</span>
-                    </div>
-                    
-                    <div class="loan-summary">
-                        <div class="summary-row">
-                            <span>Capital payment (1st Month)</span>
-                            <span id="housingFirstMonthPrincipal">LKR 0</span>
-                        </div>
-                        <div class="summary-row">
-                            <span>Interest (1st Month)</span>
-                            <span id="housingFirstMonthInterest">LKR 0</span>
-                        </div>
-                        <div class="note">*Government taxes will apply</div>
-                    </div>
-                    
-                    <div class="breakdown">
-                        <div class="breakdown-item">
-                            <strong>Principal Amount</strong>
-                            <span id="housingPrincipalAmount">LKR 0</span>
-                        </div>
-                        <div class="breakdown-item">
-                            <strong>Total Interest</strong>
-                            <span id="housingTotalInterest">LKR 0</span>
-                        </div>
-                        <div class="breakdown-item">
-                            <strong>Total Amount</strong>
-                            <span id="housingTotalAmount">LKR 0</span>
-                        </div>
-                        <div class="breakdown-item">
-                            <strong>Loan Term</strong>
-                            <span id="housingDisplayTerm">0 years</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="housingLoanBreakdown" class="loan-breakdown" style="display: none;">
-                    <h3>📈 Housing Loan Payment Schedule</h3>
-                    <div class="breakdown-controls">
-                        <button onclick="toggleHousingBreakdown()" class="toggle-btn" id="housingBreakdownToggle">
-                            📊 Show Payment Schedule
-                        </button>
-                        <button onclick="exportHousingLoanSchedule()" class="export-btn">
-                            📄 Export Schedule
-                        </button>
-                    </div>
-                    
-                    <div id="housingPaymentSchedule" class="payment-schedule" style="display: none;">
-                        <div class="schedule-header">
-                            <span>Month</span>
-                            <span>Monthly Installment Principal</span>
-                            <span>Monthly Interest</span>
-                            <span>Monthly Installment</span>
-                            <span>Principal Amount</span>
-                        </div>
-                        <div id="housingScheduleBody" class="schedule-body">
-                            <!-- Schedule rows will be populated here -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Personal Loan Calculator -->
-        <div id="personal-loan" class="tab-content">
-            <div class="calc-section">
-                <h3>💳 Personal Loan Calculator</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Loan Amount (LKR)</label>
-                        <input type="number" id="personalLoanAmount" placeholder="500,000" inputmode="numeric" pattern="[0-9]*">
-                    </div>
-                    <div class="form-group">
-                        <label>Interest Rate (% per year)</label>
-                        <input type="number" id="personalInterestRate" value="15" step="0.1" inputmode="decimal">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Loan Term (Years)</label>
-                        <input type="number" id="personalLoanTerm" value="3" min="1" max="15" inputmode="numeric">
-                    </div>
-                    <div class="form-group">
-                        <label>Loan Term (Months)</label>
-                        <input type="number" id="personalLoanTermMonths" value="0" min="0" max="11" inputmode="numeric">
-                    </div>
-                </div>
-                
-                <div class="button-group">
-                    <button onclick="calculatePersonalLoan()">Calculate Monthly Payment</button>
-                    <button onclick="resetCalculator('personal-loan')" class="clear-btn">Clear & Start New</button>
-                </div>
-                
-                <div id="personalLoanResult" class="result" style="display: none;">
-                    <div class="result-value" id="personalMonthlyPayment">LKR 0</div>
-                    <div class="result-label">Monthly Payment</div>
-                    <div class="interest-rate-display">
-                        <span>at <span id="personalDisplayRate">0%</span> p.a.</span>
-                    </div>
-                    
-                    <div class="breakdown">
-                        <div class="breakdown-item">
-                            <strong>Principal Amount</strong>
-                            <span id="personalPrincipalAmount">LKR 0</span>
-                        </div>
-                        <div class="breakdown-item">
-                            <strong>Total Interest</strong>
-                            <span id="personalTotalInterest">LKR 0</span>
-                        </div>
-                        <div class="breakdown-item">
-                            <strong>Total Amount</strong>
-                            <span id="personalTotalAmount">LKR 0</span>
-                        </div>
-                        <div class="breakdown-item">
-                            <strong>Loan Term</strong>
-                            <span id="personalDisplayTerm">0 years</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="personalLoanBreakdown" class="loan-breakdown" style="display: none;">
-                    <h3>📈 Personal Loan Payment Schedule</h3>
-                    <div class="breakdown-controls">
-                        <button onclick="togglePersonalBreakdown()" class="toggle-btn" id="personalBreakdownToggle">
-                            📊 Show Payment Schedule
-                        </button>
-                        <button onclick="exportPersonalLoanSchedule()" class="export-btn">
-                            📄 Export Schedule
-                        </button>
-                    </div>
-                    
-                    <div id="personalPaymentSchedule" class="payment-schedule" style="display: none;">
-                        <div class="schedule-header">
-                            <span>Month</span>
-                            <span>Monthly Installment Principal</span>
-                            <span>Monthly Interest</span>
-                            <span>Monthly Installment</span>
-                            <span>Principal Amount</span>
-                        </div>
-                        <div id="personalScheduleBody" class="schedule-body">
-                            <!-- Schedule rows will be populated here -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Housing Loan Calculator -->
-        <div id="housing-loan" class="tab-content">
-            <div class="calc-section">
-                <h3>🏠 Housing Loan Calculator</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Loan Amount (LKR)</label>
-                        <input type="number" id="housingLoanAmount" placeholder="5,000,000" inputmode="numeric" pattern="[0-9]*">
-                    </div>
-                    <div class="form-group">
-                        <label>Interest Rate (% per year)</label>
-                        <input type="number" id="housingInterestRate" value="9" step="0.1" inputmode="decimal">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Loan Term (Years)</label>
-                        <input type="number" id="housingLoanTerm" value="20" min="5" max="30" inputmode="numeric">
-                    </div>
-                    <div class="form-group">
-                        <label>Loan Term (Months)</label>
-                        <input type="number" id="housingLoanTermMonths" value="0" min="0" max="11" inputmode="numeric">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Repayment Type</label>
-                        <select id="repaymentType" onchange="showRepaymentDescription()">
-                            <option value="equated">Equated Balance (EMI)</option>
-                            <option value="reducing">Reducing Balance</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div id="repaymentDescription" class="repayment-description">
-                    <div class="description-content">
-                        <h4>📊 Equated Balance (EMI)</h4>
-                        <p>Equal Monthly Installments - You pay the <strong>same amount</strong> every month. Initially, more goes toward interest, then gradually more toward principal.</p>
-                        <ul>
-                            <li>✅ Predictable monthly payments</li>
-                            <li>✅ Easier budgeting</li>
-                            <li>⚠️ Higher total interest over loan term</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="button-group">
-                    <button onclick="calculateHousingLoan()">Calculate Monthly Payment</button>
-                    <button onclick="resetCalculator('housing-loan')" class="clear-btn">Clear & Start New</button>
-                </div>
-                
-                <div id="housingLoanResult" class="result" style="display: none;">
-                    <div class="result-value" id="housingMonthlyPayment">LKR 0</div>
-                    <div class="result-label" id="housingPaymentLabel">Monthly Payment (1st Month)</div>
-                    <div class="interest-rate-display">
-                        <span>at <span id="housingDisplayRate">0%</span> p.a.</span>
-                    </div>
-                    
-                    <div class="loan-summary">
-                        <div class="summary-row">
-                            <span>Capital payment (1st Month)</span>
-                            <span id="housingFirstMonthPrincipal">LKR 0</span>
-                        </div>
-                        <div class="summary-row">
-                            <span>Interest (1st Month)</span>
-                            <span id="housingFirstMonthInterest">LKR 0</span>
-                        </div>
-                        <div class="note">*Government taxes will apply</div>
-                    </div>
-                    
-                    <div class="breakdown">
-                        <div class="breakdown-item">
-                            <strong>Principal Amount</strong>
-                            <span id="housingPrincipalAmount">LKR 0</span>
-                        </div>
-                        <div class="breakdown-item">
-                            <strong>Total Interest</strong>
-                            <span id="housingTotalInterest">LKR 0</span>
-                        </div>
-                        <div class="breakdown-item">
-                            <strong>Total Amount</strong>
-                            <span id="housingTotalAmount">LKR 0</span>
-                        </div>
-                        <div class="breakdown-item">
-                            <strong>Loan Term</strong>
-                            <span id="housingDisplayTerm">0 years</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="housingLoanBreakdown" class="loan-breakdown" style="display: none;">
-                    <h3>📈 Housing Loan Payment Schedule</h3>
-                    <div class="breakdown-controls">
-                        <button onclick="toggleHousingBreakdown()" class="toggle-btn" id="housingBreakdownToggle">
-                            📊 Show Payment Schedule
-                        </button>
-                        <button onclick="exportHousingLoanSchedule()" class="export-btn">
-                            📄 Export Schedule
-                        </button>
-                    </div>
-                    
-                    <div id="housingPaymentSchedule" class="payment-schedule" style="display: none;">
-                        <div class="schedule-header">
-                            <span>Month</span>
-                            <span>Monthly Installment Principal</span>
-                            <span>Monthly Interest</span>
-                            <span>Monthly Installment</span>
-                            <span>Principal Amount</span>
-                        </div>
-                        <div id="housingScheduleBody" class="schedule-body">
-                            <!-- Schedule rows will be populated here -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Expense Calculator -->
-        <div id="expense" class="tab-content">
-            <div class="calc-section">
-                <h3>Monthly Expense Tracker</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Expense Category</label>
-                        <select id="expenseCategory">
-                            <option value="Food & Dining">Food & Dining</option>
-                            <option value="Transportation">Transportation</option>
-                            <option value="Utilities">Utilities</option>
-                            <option value="Rent/Mortgage">Rent/Mortgage</option>
-                            <option value="Healthcare">Healthcare</option>
-                            <option value="Entertainment">Entertainment</option>
-                            <option value="Shopping">Shopping</option>
-                            <option value="Education">Education</option>
-                            <option value="Insurance">Insurance</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Amount (LKR)</label>
-                        <input type="number" id="expenseAmount" placeholder="5,000" inputmode="numeric" pattern="[0-9]*">
-                    </div>
-                </div>
-                <div class="button-group">
-                    <button onclick="addExpense()">Add Expense</button>
-                    <button onclick="resetCalculator('expense')" class="clear-btn">Clear All Expenses</button>
-                </div>
-                
-                <div id="expenseActions" class="expense-actions" style="display: none;">
-                    <div class="button-group secondary">
-                        <button onclick="exportExpenses()" class="export-btn">📄 Export to CSV</button>
-                        <button onclick="printResults('expense')" class="print-btn">🖨️ Print Summary</button>
-                    </div>
-                </div>
-                
-                <div id="expenseList" class="expense-list" style="display: none;">
-                    <h4 style="margin-bottom: 15px; color: #2a5298;">Your Monthly Expenses</h4>
-                    <div id="expenses"></div>
-                </div>
-                
-                <div id="expenseResult" class="result" style="display: none;">
-                    <div class="result-value" id="totalExpenses">LKR 0</div>
-                    <div class="result-label">Total Monthly Expenses</div>
-                    <div id="expenseBreakdown" class="breakdown"></div>
-                </div>
-            </div>
-        </div>
+    <!-- Header Ad -->
+    <div class="ad-container ad-header">
+        <!-- Google AdSense - Header Banner -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX"
+             data-ad-slot="1234567890"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
 
+    <div class="container">
+        <header class="header">
+            <h1>🏦 Sri Lankan Financial Calculator 2025</h1>
+            <p>Complete financial planning toolkit for Sri Lankan residents - Calculate salary, loans, and expenses</p>
+            <div class="header-features">
+                <span>✅ EPF/ETF Calculator</span>
+                <span>✅ APIT Tax Calculator</span>
+                <span>✅ Loan Calculator</span>
+                <span>✅ Budget Planner</span>
+            </div>
+        </header>
+
+        <nav class="nav-tabs" role="navigation" aria-label="Calculator Navigation">
+            <button class="nav-tab active" onclick="showCalculator('salary')" aria-label="Salary Calculator">
+                💰 Salary Calculator
+            </button>
+            <button class="nav-tab" onclick="showCalculator('housing-loan')" aria-label="Housing Loan Calculator">
+                🏠 Housing Loan
+            </button>
+            <button class="nav-tab" onclick="showCalculator('personal-loan')" aria-label="Personal Loan Calculator">
+                💳 Personal Loan
+            </button>
+            <button class="nav-tab" onclick="showCalculator('expenses')" aria-label="Expense Planner">
+                📊 Expense Planner
+            </button>
+        </nav>
+
+        <main class="content">
+            <!-- Side Ad -->
+            <div class="ad-container ad-sidebar">
+                <!-- Google AdSense - Sidebar -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX"
+                     data-ad-slot="0987654321"
+                     data-ad-format="vertical"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+            <!-- Salary Calculator -->
+            <section id="salary" class="calculator-section active" aria-labelledby="salary-heading">
+                <header>
+                    <h2 id="salary-heading">Sri Lankan Salary Calculator (2025 Tax Rates)</h2>
+                    <div class="info">
+                        <strong>Updated Rates (2025):</strong> EPF Employee 8% + Employer 12%, ETF Employer 3%, Tax-free threshold LKR 150,000/month
+                    </div>
+                </header>
+                
+                <form class="calculator-form" onsubmit="calculateSalary(); return false;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="basic-salary">Basic Monthly Salary (LKR)</label>
+                            <input type="number" id="basic-salary" placeholder="e.g., 100000" min="0" step="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="allowances">Monthly Allowances (LKR)</label>
+                            <input type="number" id="allowances" placeholder="e.g., 25000" min="0" step="100">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn">Calculate Salary Breakdown</button>
+                </form>
+                
+                <div id="salary-results" class="results" style="display: none;">
+                    <h3>Salary Breakdown</h3>
+                    <div class="result-item">
+                        <span class="result-label">Gross Salary:</span>
+                        <span class="result-value" id="gross-salary">LKR 0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">EPF (Employee 8%):</span>
+                        <span class="result-value" id="epf-employee">LKR 0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">EPF (Employer 12%):</span>
+                        <span class="result-value" id="epf-employer">LKR 0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">ETF (Employer 3%):</span>
+                        <span class="result-value" id="etf-employer">LKR 0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">APIT (Tax):</span>
+                        <span class="result-value" id="apit-tax">LKR 0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label"><strong>Net Salary:</strong></span>
+                        <span class="result-value highlight" id="net-salary">LKR 0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Annual Net Salary:</span>
+                        <span class="result-value" id="annual-net">LKR 0</span>
+                    </div>
+                </div>
+
+                <!-- Ad between sections -->
+                <div class="ad-container ad-inline">
+                    <ins class="adsbygoogle"
+                         style="display:block; text-align:center;"
+                         data-ad-layout="in-article"
+                         data-ad-format="fluid"
+                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX"
+                         data-ad-slot="1111111111"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </section>
+
+            <!-- Housing Loan Calculator -->
+            <section id="housing-loan" class="calculator-section" aria-labelledby="housing-heading">
+                <header>
+                    <h2 id="housing-heading">Housing Loan Calculator Sri Lanka</h2>
+                    <p>Calculate your housing loan EMI, total interest, and payment schedule for Sri Lankan banks.</p>
+                </header>
+                
+                <form class="calculator-form" onsubmit="calculateHousingLoan(); return false;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="house-loan-amount">Loan Amount (LKR)</label>
+                            <input type="number" id="house-loan-amount" placeholder="e.g., 5000000" min="0" step="10000">
+                        </div>
+                        <div class="form-group">
+                            <label for="house-interest-rate">Annual Interest Rate (%)</label>
+                            <input type="number" id="house-interest-rate" step="0.01" placeholder="e.g., 12.5" min="0" max="50">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="house-loan-term">Loan Term (Years)</label>
+                            <input type="number" id="house-loan-term" placeholder="e.g., 25" min="1" max="50">
+                        </div>
+                        <div class="form-group">
+                            <label for="house-down-payment">Down Payment (LKR)</label>
+                            <input type="number" id="house-down-payment" placeholder="e.g., 1000000" min="0" step="10000">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" class="btn">Calculate Housing Loan</button>
+                        <button type="button" class="btn btn-secondary" onclick="showAmortization('housing')">Show Payment Schedule</button>
+                    </div>
+                </form>
+                
+                <div id="housing-results" class="results" style="display: none;"></div>
+                <div id="housing-amortization" style="display: none;"></div>
+            </section>
+
+            <!-- Personal Loan Calculator -->
+            <section id="personal-loan" class="calculator-section" aria-labelledby="personal-heading">
+                <header>
+                    <h2 id="personal-heading">Personal Loan Calculator Sri Lanka</h2>
+                    <p>Calculate personal loan EMI and total cost including processing fees.</p>
+                </header>
+                
+                <form class="calculator-form" onsubmit="calculatePersonalLoan(); return false;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="personal-loan-amount">Loan Amount (LKR)</label>
+                            <input type="number" id="personal-loan-amount" placeholder="e.g., 500000" min="0" step="1000">
+                        </div>
+                        <div class="form-group">
+                            <label for="personal-interest-rate">Annual Interest Rate (%)</label>
+                            <input type="number" id="personal-interest-rate" step="0.01" placeholder="e.g., 18.5" min="0" max="50">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="personal-loan-term">Loan Term (Years)</label>
+                            <input type="number" id="personal-loan-term" placeholder="e.g., 5" min="1" max="20">
+                        </div>
+                        <div class="form-group">
+                            <label for="processing-fee">Processing Fee (LKR)</label>
+                            <input type="number" id="processing-fee" placeholder="e.g., 10000" min="0" step="500">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" class="btn">Calculate Personal Loan</button>
+                        <button type="button" class="btn btn-secondary" onclick="showAmortization('personal')">Show Payment Schedule</button>
+                    </div>
+                </form>
+                
+                <div id="personal-results" class="results" style="display: none;"></div>
+                <div id="personal-amortization" style="display: none;"></div>
+
+                <!-- Another inline ad -->
+                <div class="ad-container ad-inline">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-format="rectangle"
+                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX"
+                         data-ad-slot="2222222222"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </section>
+
+            <!-- Monthly Expense Planner -->
+            <section id="expenses" class="calculator-section" aria-labelledby="expenses-heading">
+                <header>
+                    <h2 id="expenses-heading">Monthly Expense Planner & Budget Calculator</h2>
+                    <p>Plan your monthly budget, track expenses, and analyze your financial health with visual charts.</p>
+                </header>
+                
+                <form class="calculator-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="monthly-income">Monthly Net Income (LKR)</label>
+                            <input type="number" id="monthly-income" placeholder="e.g., 75000" min="0" step="1000">
+                        </div>
+                    </div>
+
+                    <h3>Add Expense Categories</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expense-category">Category</label>
+                            <input type="text" id="expense-category" placeholder="e.g., Food, Transport, Utilities">
+                        </div>
+                        <div class="form-group">
+                            <label for="expense-amount">Amount (LKR)</label>
+                            <input type="number" id="expense-amount" placeholder="e.g., 15000" min="0" step="100">
+                        </div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="button" class="btn" onclick="addExpense()">Add Expense</button>
+                        <button type="button" class="btn btn-primary" onclick="calculateExpenses()">Calculate Budget</button>
+                        <button type="button" class="btn btn-secondary" onclick="clearExpenses()">Clear All</button>
+                    </div>
+                </form>
+
+                <div id="expense-list"></div>
+                
+                <div id="expense-results" class="results" style="display: none;"></div>
+                
+                <!-- Pie Chart Container -->
+                <div id="expense-chart-container" class="chart-container" style="display: none;">
+                    <h3>Expense Breakdown</h3>
+                    <canvas id="expenseChart" width="400" height="400"></canvas>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About This Calculator</h4>
+                    <p>Free Sri Lankan financial calculator updated for 2025 tax rates. Calculate salary with EPF, ETF, APIT deductions, housing loans, personal loans, and plan your monthly expenses.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>Sri Lankan Salary Calculator</li>
+                        <li>EPF/ETF Calculator</li>
+                        <li>APIT Tax Calculator</li>
+                        <li>Housing Loan Calculator</li>
+                        <li>Personal Loan Calculator</li>
+                        <li>Expense Planning Tools</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Disclaimer</h4>
+                    <p>This calculator provides estimates based on current Sri Lankan tax regulations. Always consult with qualified financial advisors for official financial planning.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Sri Lankan Financial Calculator. Updated for latest tax rates and regulations.</p>
+                <p>Keywords: Sri Lanka salary calculator, EPF calculator, ETF calculator, APIT tax calculator, loan calculator Sri Lanka</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bottom Ad -->
+    <div class="ad-container ad-footer">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX"
+             data-ad-slot="3333333333"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- JavaScript -->
     <script src="script.js"></script>
+    
+    <!-- Google Analytics (Optional) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
 </body>
 </html>
