@@ -986,3 +986,5 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+
+// L Logic Removed
